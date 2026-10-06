@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="./assets/battleship.gif" width="100%" alt="Pixel-art battleship sailing across the profile">
+<img src="./assets/battleship.gif" width="100%" alt="Pixel-art battleship sailing at night">
 
 # Ifturahman
 
-### Engineering • Programming • Projects
+**Engineering · Programming · Projects**
 
 </div>
 
@@ -13,21 +13,21 @@
 ## ⚙️ About
 
 I'm a technical-industrial student interested in programming, engineering,
-hardware and building things from scratch.
+hardware, machines and building things from scratch.
 
 ```text
 STATUS       ● ONLINE
 CURRENTLY    Learning & building
-INTERESTS    Software • Hardware • Machines
+INTERESTS    Software · Hardware · Machines
 ```
 
 ## 🛠️ Projects
 
-> A place for the things I'm currently building.
+A collection of things I'm building, experimenting with and occasionally breaking.
 
-- 🚧 **Project 01** — coming soon
-- 🔧 **Project 02** — coming soon
-- 🧪 **Experiments** — small projects and random ideas
+- 🚧 **Project 01** — in development
+- 🔧 **Project 02** — in development
+- 🧪 **Experiments** — small projects & random ideas
 
 ## 💻 Technologies
 
