@@ -1,10 +1,12 @@
 <div align="center">
 
-<img src="./assets/battleship.gif" width="100%" alt="Pixel-art battleship sailing at night">
+<img src="./assets/battleship.gif" width="100%" alt="Pixel-art battleship sailing across a calm night sea">
+
+<br>
 
 # Ifturahman
 
-**Engineering · Programming · Projects**
+### Engineering · Programming · Projects
 
 </div>
 
@@ -22,8 +24,6 @@ INTERESTS    Software · Hardware · Machines
 ```
 
 ## 🛠️ Projects
-
-A collection of things I'm building, experimenting with and occasionally breaking.
 
 - 🚧 **Project 01** — in development
 - 🔧 **Project 02** — in development
