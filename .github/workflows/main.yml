@@ -3,7 +3,6 @@ name: Randomize profile banner
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 06:17 UTC. GitHub Actions cannot run on every README page refresh.
     - cron: "17 6 * * *"
 
 permissions:
@@ -12,6 +11,7 @@ permissions:
 jobs:
   random-banner:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -20,24 +20,36 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t banners < <(find assets/banners -maxdepth 1 -type f -name '*.gif' | sort)
+
+          shopt -s nullglob
+          banners=(assets/banners/*.gif)
+
           if [ "${#banners[@]}" -lt 2 ]; then
-            echo "Add at least two GIF files to assets/banners/"
+            echo "ERROR: Need at least two GIF files in assets/banners/"
+            printf 'Found: %s\n' "${banners[@]}"
             exit 1
           fi
-          current="$(od -An -N4 -tu4 /dev/urandom | tr -d ' ')"
-          chosen="${banners[$((current % ${#banners[@]}))]}"
+
+          index=$(shuf -i 0-$((${#banners[@]} - 1)) -n 1)
+          chosen="${banners[$index]}"
+
           cp "$chosen" assets/current-banner.gif
-          echo "Selected: $chosen"
+          echo "Selected banner: $chosen"
 
       - name: Commit banner if it changed
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add assets/current-banner.gif
+
           if git diff --cached --quiet; then
-            echo "No banner change."
+            echo "Banner unchanged; no commit needed."
           else
             git commit -m "chore: randomize profile banner"
             git push
           fi
+```
