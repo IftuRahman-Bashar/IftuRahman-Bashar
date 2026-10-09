@@ -25,7 +25,7 @@ jobs:
             echo "Add at least two GIF files to assets/banners/"
             exit 1
           fi
-          current="$(cat /dev/urandom | od -An -N4 -tu4 | tr -d ' ')"
+          current="$(od -An -N4 -tu4 /dev/urandom | tr -d ' ')"
           chosen="${banners[$((current % ${#banners[@]}))]}"
           cp "$chosen" assets/current-banner.gif
           echo "Selected: $chosen"
