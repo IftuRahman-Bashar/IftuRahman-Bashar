@@ -1,0 +1,43 @@
+name: Randomize profile banner
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 06:17 UTC. GitHub Actions cannot run on every README page refresh.
+    - cron: "17 6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  random-banner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Select one of the ship banners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t banners < <(find assets/banners -maxdepth 1 -type f -name '*.gif' | sort)
+          if [ "${#banners[@]}" -lt 2 ]; then
+            echo "Add at least two GIF files to assets/banners/"
+            exit 1
+          fi
+          current="$(cat /dev/urandom | od -An -N4 -tu4 | tr -d ' ')"
+          chosen="${banners[$((current % ${#banners[@]}))]}"
+          cp "$chosen" assets/current-banner.gif
+          echo "Selected: $chosen"
+
+      - name: Commit banner if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/current-banner.gif
+          if git diff --cached --quiet; then
+            echo "No banner change."
+          else
+            git commit -m "chore: randomize profile banner"
+            git push
+          fi
