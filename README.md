@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/battleship.gif" width="100%" alt="Pixel-art Mikasa battleship sailing across a calm night sea">
+<img src="./assets/current-banner.gif" width="100%" alt="A randomly selected animated battleship banner">
 
 <br>
 
